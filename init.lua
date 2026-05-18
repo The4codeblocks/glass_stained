@@ -39,7 +39,7 @@ local nodeboxes = {
 	double = {{-0.5, -0.5, 0, 0.5, 1.5, 0}},
 	triple = {{-0.5, -0.5, 0, 0.5, 1.5, 0}, {0.5, -0.5, 0, 1.5, 0.5, 0}},
 	quadruple = {{-0.5, -0.5, 0, 1.5, 1.5, 0}},
-	noncuple = {{-1.5, -1.5, 0, 1.5, 1.5, 0}},
+	nonuple = {{-1.5, -1.5, 0, 1.5, 1.5, 0}},
 	offset = {{-0.5, -0.5, 1, 0.5, 0.5, 1}}
 }
 
@@ -48,7 +48,7 @@ local thick_nodeboxes = {
 	double = {{-0.5, -0.5, -0.03125, 0.5, 1.5, 0.03125}},
 	triple = {{-0.5, -0.5, -0.03125, 0.5, 1.5, 0.03125}, {-0.5, -0.5, -0.03125, 1.5, 0.5, 0.03125}},
 	quadruple = {{-0.5, -0.5, -0.03125, 1.5, 1.5, 0.03125}},
-	noncuple = {{-1.5, -1.5, -0.03125, 1.5, 1.5, 0.03125}},
+	nonuple = {{-1.5, -1.5, -0.03125, 1.5, 1.5, 0.03125}},
 	offset = {{-0.5, -0.5, 0.96875, 0.5, 0.5, 1.03125}}
 }
 
@@ -57,7 +57,7 @@ local selection_boxes = {
 	double = {{-0.5, -0.5, -0.25, 0.5, 1.5, 0.25}},
 	triple = {{-0.5, -0.5, -0.25, 0.5, 1.5, 0.25}, {-0.5, -0.5, -0.25, 1.5, 0.5, 0.25}},
 	quadruple = {{-0.5, -0.5, -0.25, 1.5, 1.5, 0.25}},
-	noncuple = {{-1.5, -1.5, -0.25, 1.5, 1.5, 0.25}},
+	nonuple = {{-1.5, -1.5, -0.25, 1.5, 1.5, 0.25}},
 	offset = {{-0.5, -0.5, 0.75, 0.5, 0.5, 1.25}}
 }
 
@@ -154,7 +154,7 @@ local function define_crafts(pane, main_craft, main_output)
 	})
 	
 	minetest.register_craft({
-		output = pane.."_noncuple",
+		output = pane.."_nonuple",
 		recipe = {
 			{single_pane, single_pane, single_pane},
 			{single_pane, single_pane, single_pane},
@@ -165,7 +165,7 @@ local function define_crafts(pane, main_craft, main_output)
 	minetest.register_craft({
 		output = single_pane.." 9",
 		recipe = {
-			{pane.."_noncuple"}
+			{pane.."_nonuple"}
 		},
 	})
 	
@@ -208,7 +208,7 @@ for name, selection_box in pairs(selection_boxes) do
 			sounds = default.node_sound_glass_defaults()
 		})
 		
-		if name == "noncuple" then
+		if name == "nonuple" then
 			define_crafts("glass_stained:glass_"..node, {
 				{"dye:"..crafting[node][1], "xpanes:pane_flat"},
 				{"dye:"..crafting[node][2], "xpanes:pane_flat"},
@@ -221,6 +221,8 @@ for name, selection_box in pairs(selection_boxes) do
 			minetest.register_alias("glass_stained:glass_number_"..alias[node].."top", "glass_stained:glass_"..node.."double")
 		end
 	end
+	
+	core.register_alias(pane.."_noncuple", pane.."_nonuple")
 	
 	for _, pane in ipairs(panes) do
 		minetest.register_node("glass_stained:pane_"..pane[1].."_"..name, {
@@ -244,7 +246,7 @@ for name, selection_box in pairs(selection_boxes) do
 			sounds = pane[5]
 		})
 		
-		if name == "noncuple" then
+		if name == "nonuple" then
 			define_crafts("glass_stained:pane_"..pane[1], pane[6], pane[7])
 		end
 	end
